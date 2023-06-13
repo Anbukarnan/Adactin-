@@ -11,17 +11,17 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.maven.baseclass.Baseclass;
 
 @RunWith(Suite.class)
-@SuiteClasses({login.class,registerpage.class,searchHotel.class,hotelSelect.class,bookHotel.class,bookingconf.class,idprint.class})
+@SuiteClasses({login.class,registerpage.class,searchHotel.class,hotelSelect.class,bookHotel.class,classadatin.class})
 public class TestRunner extends Baseclass {
 	@BeforeClass
 	public static void beforeclass() {
-		Browerlauch("edge");
+		Browerlauch("chrome");
 		
 
 	}
 	@AfterClass
     public static void afterclass() {
-		driver.quit();
+		// driver.quit();
 		
 
 	}
