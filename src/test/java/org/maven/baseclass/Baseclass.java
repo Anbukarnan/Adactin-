@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -51,6 +52,14 @@ public class Baseclass {
 			driver = new FirefoxDriver();
 			break;
 		}
+	}
+	public static WebElement findelement( String xpathvalue) {
+		WebElement element = driver.findElement(By.xpath( xpathvalue ));
+		return element;
+	}
+	public static List<WebElement> findelements( String xpathvalue) {
+		List<WebElement> element = driver.findElements(By.xpath(xpathvalue));
+		return element;
 	}
 
 	public static void time(int sec) {
@@ -260,8 +269,8 @@ public class Baseclass {
 
 	}
 	//-------------------------------Data Driven-----------------
-	public static String excelfileread(String name, String sheetname,int rowno,int cellno) throws IOException {
-		File f = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\excelfiles\\"+ name+".xlsx");
+	public static String excelfileread(String excelname, String sheetname,int rowno,int cellno) throws IOException {
+		File f = new File(System.getProperty("user.dir")+"\\src\\test\\resources\\excelfiles\\"+ excelname+".xlsx");
 		FileInputStream fi = new FileInputStream(f);
 		Workbook w = new XSSFWorkbook(fi);
 		Sheet s = w.getSheet(sheetname);

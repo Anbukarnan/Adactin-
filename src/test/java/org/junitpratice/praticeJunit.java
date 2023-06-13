@@ -1,11 +1,12 @@
 package org.junitpratice;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.Adatin.pom.bookingconf;
 import org.Adatin.pom.hotelBook;
 import org.Adatin.pom.hotelSearch;
-import org.Adatin.pom.printid;
+import org.Adatin.pom.orderno;
 import org.Adatin.pom.selectHotel;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.maven.baseclass.Baseclass;
+import org.openqa.selenium.WebElement;
 
 public class praticeJunit extends Baseclass {
 	
@@ -47,7 +49,7 @@ public class praticeJunit extends Baseclass {
 		sendkeys(hb.getFirstname(), "Anbu");
 		sendkeys(hb.getLastname(), "selvan");
 		sendkeys(hb.getBilladdress(), "trichy");
-		sendkeys(hb.getCardno(), "6754334567886545");
+		sendkeys(hb.getCardno(), "1234334567886545");
 		selectbyvalue("MAST", hb.getCardtype());
 		selectbyvalue("12", hb.getExpmonth());
 		selectbyvalue("2026", hb.getExpyear());
@@ -57,8 +59,20 @@ public class praticeJunit extends Baseclass {
 		 bookingconf b = new bookingconf();
 			click(b.getSearch());
 			
-			printid p=new printid();
-			System.out.println(attributemethod(p.getPrint(), "value"));
+			orderno o = new orderno();
+			System.out.println(attributemethod(o.getGetprint(), "value"));
+			String idno = attributemethod(o.getGetprint(), "value");
+			click(o.getItinerary());
+			
+//			
+//			WebElement table = findelement(o.getTable());
+//			List<WebElement> td = findelements(o.getTabledata());
+//			 for(int i=0;i<td.size();i++) {
+//			WebElement data = td.get(i);
+//			String text = data.getText();
+//			if(idno==text) {
+//				System.out.println(text);
+//			}}
 
         
 
