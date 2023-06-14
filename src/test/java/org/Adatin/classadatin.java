@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.Adatin.pom.orderno;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -18,26 +19,32 @@ import org.openqa.selenium.WebElement;
 
 public class classadatin extends Baseclass {
 	@Test
-	public void test() throws InterruptedException, IOException {
+	public void test() throws InterruptedException, IOException, InvalidFormatException {
 		orderno o = new orderno();
 		
 		
 		String idno = attributemethod(o.getGetprint(), "value");
 		System.out.println(idno);
 		click(o.getItinerary());
-		WebElement table = driver.findElement(By.xpath("//table[@cellpadding='5']"));
-		List<WebElement> td = table.findElements(By.xpath("//input[@class='select_text']"));
+		File f = new File("C:\\Users\\New\\Desktop\\projects\\Adactin-\\src\\test\\resources\\excelfiles\\orderid.xlsx");
+		Workbook w = new XSSFWorkbook();
+		Sheet sheet = w.createSheet("Data");
+		Row row = sheet.createRow(0);
+		row.createCell(0).setCellValue("Genarate order id");
+		row.createCell(1).setCellValue(idno);
 		
 		
-		for(int i=0;i<td.size();i++) {
-		System.out.println(td.get(i).getAttribute("value"));
-		String orid = td.get(i).getAttribute("value");
+		for(int i=0;i<o.getTabledata().size();i++) {
+		
+		String orid = o.getTabledata().get(i).getAttribute("value");
 		
 		if( idno.equals(orid)) {
 			System.out.println(idno);
-			List<WebElement> cancel = driver.findElements(By.xpath("//input[@type='button']"));
-			System.out.println("Cancel id no"+idno);
-			cancel.get(cancel.size()-3).click();
+			row.createCell(2).setCellValue("Cancel id number");
+			row.createCell(3).setCellValue(idno);
+			
+			System.out.println("Cancel id no "+idno);
+			o.getCancel().get(o.getCancel().size()-3).click();
 			driver.switchTo().alert().accept();
 			
 			
@@ -46,5 +53,7 @@ public class classadatin extends Baseclass {
 			
 		}
 		}
+		FileOutputStream fo = new FileOutputStream(f);
+		w.write(fo);
 }
 }
