@@ -2,6 +2,7 @@ package org.maven.baseclass;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -299,6 +300,20 @@ public class Baseclass {
 		
 		
 		
+
+	}
+	
+	
+	public static void excelwrite(String excelname,int i,String sheetname,int j,String celldata) throws IOException  {
+		File f=new File(System.getProperty("user.dir")+"\\excel\\"+ excelname +".xlsx");
+		
+		Workbook w = new XSSFWorkbook();
+		Sheet sheet = w.createSheet(sheetname);
+		Row row = sheet.createRow(i);
+		Cell cell = row.createCell(j);
+		cell.setCellValue(celldata);
+		FileOutputStream fo =new FileOutputStream(f);
+		w.write(fo);
 
 	}
 	
